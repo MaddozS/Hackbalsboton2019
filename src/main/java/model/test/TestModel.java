@@ -19,9 +19,6 @@ import model.schemas.*;
  */
 public class TestModel {
     public static void main(String[] args){
-        House house = new House("Casa de Pepe");
-        HouseCRUD hc = new HouseCRUD();
-        hc.createHouse(house);
         test();
     }
         private static EntityManagerFactory emf;

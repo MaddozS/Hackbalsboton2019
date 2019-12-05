@@ -15,13 +15,19 @@ public class User {
     private String Email;
     @Column(name = "password", columnDefinition = "LONGTEXT")
     private String Password;
+    @Column(name = "question", columnDefinition = "LONGTEXT")
+    private String Question;
+    @Column(name = "answer", columnDefinition = "LONGTEXT")
+    private String Answer;
 
     public User(){}
 
-    public User(String name, String email, String password) {
+    public User(String name, String email, String password, String question, String answer) {
         Name = name;
         Email = email;
         Password = password;
+        Question = question;
+        Answer = answer;
     }
 
     public int getId() {
@@ -52,6 +58,22 @@ public class User {
         Password = password;
     }
 
+    public String getQuestion() {
+        return Question;
+    }
+
+    public void setQuestion(String question) {
+        Question = question;
+    }
+
+    public String getAnswer() {
+        return Answer;
+    }
+
+    public void setAnswer(String answer) {
+        Answer = answer;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -59,6 +81,8 @@ public class User {
                 ", Name='" + Name + '\'' +
                 ", Email='" + Email + '\'' +
                 ", Password='" + Password + '\'' +
+                ", Question='" + Question + '\'' +
+                ", Answer='" + Answer + '\'' +
                 '}';
     }
 }

@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import model.crud.HouseCRUD;
-import model.crud.SpacesCRUD;
 import model.schemas.Area;
 import view.setupAreas;
 
@@ -21,20 +20,17 @@ import view.setupAreas;
 public class AreaCRUD {
     
     HashMap<String, String> areas;
-    SpacesCRUD model;
+    model.crud.AreaCRUD model;
     Area area;
     
     public AreaCRUD(){
         areas = new HashMap<>();
-        model = new SpacesCRUD();
+        model = new model.crud.AreaCRUD();
     }
     
     public HashMap<String, String> getCurrentAreas(){
-        HouseCRUD houseModel = new HouseCRUD(); 
         HashMap<String,String> currentAreas = new HashMap<>();
-        
-        
-        
+
         return currentAreas;
     }
     

@@ -23,7 +23,9 @@ public class add_user
   nuser.setName(view.getNombre());
   nuser.setEmail(view.getCorreo());
   nuser.setPassword(view.getContrasena());
-  
+  nuser.setQuestion(view.getSecurityQuestion());
+  nuser.setAnswer(view.getSecurityAnswer());
+
   Map<String, String> data = new HashMap<>();
   data.put("nombre", view.getNombre());
   data.put("correo", view.getCorreo());

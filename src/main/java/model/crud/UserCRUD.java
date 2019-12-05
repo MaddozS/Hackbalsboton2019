@@ -73,5 +73,23 @@ public class UserCRUD {
             }
         }
     }
-
+    
+    public void updateUser(User user){
+        EntityManager manager = EMFBootstrapper.openEntityManager();
+        EntityTransaction transaction = manager.getTransaction();
+        try {
+            transaction.begin();
+            manager.merge(user);
+            transaction.commit();
+            System.out.printf("se ha cambiado con exito");
+        }
+        catch(PersistenceException e) {
+            transaction.rollback();
+            throw e;
+        }
+        finally {
+            manager.close();
+        }
+    }
+    
 }
