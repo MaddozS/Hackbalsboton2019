@@ -5,9 +5,10 @@
  */
 package view;
 
-import controller.ChangePasswordController;
-import javax.swing.JButton;
-import javax.swing.JTextField;
+import controller.deprecated.ChangePasswordController;
+import controller.ForgetPasswordController;
+
+import javax.swing.*;
 
 /**
  *
@@ -110,15 +111,29 @@ public class changePasswordView extends javax.swing.JFrame {
     public void setController(ChangePasswordController controller){
         this.controller = controller;
     }
-    
+
+    public void noMatch(){
+        JOptionPane.showMessageDialog(this, "The fields doesn't match, try again" , "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void emptyField(){
+        JOptionPane.showMessageDialog(this, "You have one or more empty fields" , "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showError(Exception ex){
+        JOptionPane.showMessageDialog(this, ex.getMessage() , "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+    public void connectionError(){
+        JOptionPane.showMessageDialog(this, "Cannot establish a connection with the server, try again" , "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
     private void changePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordActionPerformed
-        if(controller.changePassword(this)){
-            new Login().setVisible(true);
-            
-            this.dispose();
-        }
+        ForgetPasswordController.changePassword(this);
     }//GEN-LAST:event_changePasswordActionPerformed
 
+    public void showLoginView(){
+        new Login().setVisible(true);
+        this.dispose();
+    }
     /**
      * @param args the command line arguments
      */

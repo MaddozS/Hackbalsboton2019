@@ -13,12 +13,12 @@ import java.util.List;
 public class TestUser {
 
     public static void main(String[] args){
-//        User user1 = new User("Jorge", "Axel@lol.com", "pass"); //debería fallar
-//        User user2 = new User("Mario", "hola2.com", "pass"); //se debería agrear y tener ID 18
-//        UserCRUD uc = new UserCRUD();
-//        uc.createUser(user1);
-//        uc.createUser(user2);
-        test();
+        User user_add = new User("Jorge", "jorge@hotmail.com", "holamundo", "What is the name of my dog?", "lucho");
+        UserCRUD uc = new UserCRUD();
+        User user = uc.getUser("axel@axel.com");
+
+        System.out.println(user.toString());
+        uc.createUser(user_add);
     }
     private static EntityManagerFactory emf;
     private static EntityManager manager;

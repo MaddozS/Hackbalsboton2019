@@ -17,79 +17,43 @@ import model.schemas.User;
  * @author joses
  */
 public class UserCRUD {
-    
-    public void createUser(User user){
-        EntityManager manager = EMFBootstrapper.openEntityManager();
+    private EntityManager manager = EMFBootstrapper.openEntityManager();
+
+    public void createUser(User user) throws PersistenceException{
         EntityTransaction transaction = manager.getTransaction();
-        try {
-            transaction.begin();
-            manager.persist(user);
-            transaction.commit();
-            System.out.printf("se ha añadido con exito");
-        }
-        catch(PersistenceException e) {
-            transaction.rollback();
-            throw e;
-        }
-        finally {
-            manager.close();
-        }
+        transaction.begin();
+        manager.persist(user);
+        transaction.commit();
+
+        System.out.printf("se ha añadido con exito");
     }
 
-    public User getUser(String email){
-        EntityManager manager = EMFBootstrapper.openEntityManager();
-        User user = new User();
-        try {
-            user = (User) manager.createQuery("from User u where u.Email='" + email + "'").getSingleResult();
-        }
-        catch(PersistenceException e) {
-            throw e;
-        }
-
+    public User getUser(String email) throws PersistenceException{
+        User user;
+        user = (User) manager.createQuery("from User u where u.Email='" + email + "'").getSingleResult();
         return user;
     }
     
-    public void deleteUser(String email){
-        String delims = "[,]";
-        String[] tokens = email.split(delims);
-
-
-        for(int i = 0; i < tokens.length; i++){
-            User user = getUser(tokens[i]);
-            EntityManager manager = EMFBootstrapper.openEntityManager();
-            EntityTransaction transaction = manager.getTransaction();
-            try {
-                transaction.begin();
-                manager.remove(user);
-                transaction.commit();
-                System.out.printf("se ha eliminado con exito");
-            }
-            catch(PersistenceException e) {
-                transaction.rollback();
-                throw e;
-            }
-            finally {
-                manager.close();
-            }
-        }
-    }
-    
-    public void updateUser(User user){
-        EntityManager manager = EMFBootstrapper.openEntityManager();
+    public void deleteUser(User user) throws PersistenceException{
         EntityTransaction transaction = manager.getTransaction();
-        try {
-            transaction.begin();
-            manager.merge(user);
-            transaction.commit();
-            System.out.printf("se ha cambiado con exito");
-        }
-        catch(PersistenceException e) {
-            transaction.rollback();
-            throw e;
-        }
-        finally {
-            manager.close();
-        }
+
+        transaction.begin();
+        manager.remove(user);
+        transaction.commit();
+        System.out.printf("se ha eliminado con exito");
+
     }
     
+    public void updateUser(User user) throws PersistenceException{
+        EntityTransaction transaction = manager.getTransaction();
+        transaction.begin();
+        manager.merge(user);
+        transaction.commit();
+        System.out.printf("se ha cambiado con exito");
+
+    }
+
+    public void closeCRUD(){
+        manager.close();
+    }
 }

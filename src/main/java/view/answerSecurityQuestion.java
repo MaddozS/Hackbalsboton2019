@@ -5,26 +5,22 @@
  */
 package view;
 
-import controller.AnswerQuestionController;
-import controller.ChangePasswordController;
-import controller.ForgotPasswordController;
+import controller.ForgetPasswordController;
+
+import javax.swing.*;
 
 /**
  *
  * @author axel_
  */
 public class answerSecurityQuestion extends javax.swing.JFrame {
-    private AnswerQuestionController controller;
     /**
      * Creates new form answerSecurityQuestion
      */
     public answerSecurityQuestion() {
         initComponents();
     }
-    public void setController(AnswerQuestionController controller){
-        this.controller = controller;
-    }
-    
+
     public String getAnswer(){
         return this.asnwer.getText();
     }
@@ -107,16 +103,15 @@ public class answerSecurityQuestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        controller.checkAnswer(this);
+        ForgetPasswordController.checkAnswer(this);
     }//GEN-LAST:event_jButton2ActionPerformed
     
-    public void showChangePasswordView(ChangePasswordController controller){
-        changePasswordView changePassword = new changePasswordView();
-        changePassword.setController(controller);
-        changePassword.setVisible(true);
+    public void showChangePasswordView(){
+        new changePasswordView().setVisible(true);
         this.dispose();
-        
+    }
+    public void showErrorAnswer(){
+        JOptionPane.showMessageDialog(this, "Wrong answer" , "ERROR", JOptionPane.ERROR_MESSAGE);
     }
     /**
      * @param args the command line arguments

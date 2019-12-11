@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.deprecated;
 
 import javax.swing.JOptionPane;
+
+import controller.deprecated.AnswerQuestionController;
 import model.crud.UserCRUD;
 import model.schemas.User;
 import view.ForgotPassword;
@@ -24,7 +26,7 @@ public class ForgotPasswordController {
             User userToChange = model.getUser(view.getEmail());
             AnswerQuestionController answerController = new AnswerQuestionController();
             answerController.setUserToChange(userToChange);
-            view.showQuestionWindow(userToChange.getQuestion(), answerController);
+            view.showQuestionWindow(userToChange.getQuestion());
             result = true;
         }
         catch(Exception ex){

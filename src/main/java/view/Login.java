@@ -5,7 +5,11 @@
  */
 package view;
 
-import controller.Login_Controller;
+import controller.LoginController;
+import controller.exceptions.EmptyException;
+
+import javax.swing.*;
+import java.sql.SQLException;
 
 
 /**
@@ -13,7 +17,6 @@ import controller.Login_Controller;
  * @author raulrivadeneyra
  */
 public class Login extends javax.swing.JFrame {
-    Login_Controller Log = new Login_Controller();
     /**
      * Creates new form Login
      */
@@ -28,6 +31,24 @@ public class Login extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    public void loginSuccess(){
+        JOptionPane.showMessageDialog(this, "Login success" , "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void noValidInput(){
+        JOptionPane.showMessageDialog(this, "Password or email invalid, try again" , "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void emptyField(){
+        JOptionPane.showMessageDialog(this, "You have one or more empty fields" , "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    public void connectionError(){
+        JOptionPane.showMessageDialog(this, "Cannot establish a connection with the server, try again" , "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+    public void showError(Exception ex){
+        JOptionPane.showMessageDialog(this, ex.getMessage() , "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+
     private void initComponents() {
 
         jTextField3 = new javax.swing.JTextField();
@@ -130,17 +151,12 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            if(Log.LoginUser(this)){
-                Home homee = new Home();
-                homee.setVisible(true);
-                this.dispose();
-            }
-        } catch (Exception ex) {
-            Log.showError(ex, this);
-        }
+        LoginController.LoginUser(this);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    public void showPanelView(){
+        new Home().setVisible(true);
+        this.dispose();
+    }
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed

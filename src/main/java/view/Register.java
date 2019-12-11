@@ -7,8 +7,10 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import controller.add_user;
+import controller.RegisterController;
 import controller.exceptions.EmptyException;
+
+import javax.swing.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +19,6 @@ import java.util.logging.Logger;
  * @author Daniel
  */
 public class Register extends javax.swing.JFrame implements ActionListener {
-    add_user Reg = new add_user();
     /**
      * Creates new form Register
      */
@@ -204,7 +205,6 @@ public class Register extends javax.swing.JFrame implements ActionListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
@@ -215,17 +215,30 @@ public class Register extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        try {
-            Reg.nuevo_usuario(this);
-            Login Log = new Login();
-            Log.setVisible(true);
-            this.dispose();
-        } catch (EmptyException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         RegisterController.addUser(this);
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void alreadyExist(){
+        JOptionPane.showMessageDialog(this, "This email is already in use" , "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void noValidEmail(){
+        JOptionPane.showMessageDialog(this, "Invalid email");
+    }
+
+    public void showError(Exception ex){
+        JOptionPane.showMessageDialog(this, ex.getMessage() , "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+    public void connectionError(){
+        JOptionPane.showMessageDialog(this, "Cannot establish a connection with the server, try again" , "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+    public void emptyField(){
+        JOptionPane.showMessageDialog(this, "You have one or more empty fields" , "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    public void noMatch(){
+        JOptionPane.showMessageDialog(this,"The passwords doesn't match", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
         // TODO add your handling code here:
